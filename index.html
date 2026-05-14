@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#00897b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <title>صيدلية مصر | Egyptian Pharmacy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00897b;
+            --primary-dark: #00695c;
+            --primary-light: #4db6ac;
+            --accent: #d4af37;
+            --accent-light: #f5e6a3;
+            --bg-dark: #0a1628;
+            --bg-card: #121f36;
+            --bg-card-hover: #1a2d4a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0b4c8;
+            --text-muted: #5a7a9a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --border: rgba(255,255,255,0.06);
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 0%, rgba(0,137,123,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(212,175,55,0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(10,22,40,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,137,123,0.3);
+        }
+
+        .header-logo h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cairo';
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+            padding-bottom: 90px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-family: 'Cairo';
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0,137,123,0.15);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .categories-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .categories-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-secondary);
+            font-family: 'Cairo';
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,137,123,0.3);
+        }
+
+        /* Banner */
+        .banner {
+            margin: 0 20px 24px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: var(--radius);
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -30%;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            bottom: -40%; left: -20%;
+            width: 200px; height: 200px;
+            background: rgba(212,175,55,0.1);
+            border-radius: 50%;
+        }
+
+        .banner h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner .banner-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Title */
+        .section-title {
+            padding: 0 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .section-title .count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 18px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(0,137,123,0.15);
+        }
+
+        .product-card .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0,137,123,0.15), rgba(0,137,123,0.05));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .product-card .product-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card .product-generic {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-card .price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .product-card .price span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .product-card .add-btn {
+            width: 34px;
+            height: 34px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .product-card .add-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .product-card .badge-rx {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(244,67,54,0.15);
+            color: var(--danger);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .product-card .badge-otc {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(76,175,80,0.15);
+            color: var(--success);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,22,40,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            font-family: 'Cairo';
+        }
+
+        .nav-item.active {
+            color: var(--primary-light);
+        }
+
+        .nav-item:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-item .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        .nav-item .nav-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        /* Cart Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, rgba(0,137,123,0.15), rgba(0,137,123,0.05));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .cart-item-info .price {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-qty button {
+            width: 28px;
+            height: 28px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-qty span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 16px;
+        }
+
+        .cart-total .total-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cart-total .total-amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-family: 'Cairo';
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,137,123,0.3);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,137,123,0.4);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+        }
+
+        .empty-cart .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        /* Product Detail Modal */
+        .detail-modal {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-modal .modal {
+            border-radius: 24px;
+            max-width: 450px;
+            margin: 20px;
+            max-height: 80vh;
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .detail-header .detail-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(0,137,123,0.2), rgba(0,137,123,0.05));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 14px;
+        }
+
+        .detail-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .detail-header .generic-name {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .detail-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-info-item {
+            background: rgba(255,255,255,0.03);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .detail-info-item .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .detail-info-item .value {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .detail-price {
+            text-align: center;
+            padding: 16px;
+            background: rgba(212,175,55,0.08);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .detail-price .price-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .detail-price .price-unit {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .detail-add-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Cairo';
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .detail-add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,137,123,0.3);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Cairo';
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0,137,123,0.4);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Order Success */
+        .order-success {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .order-success .success-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .order-success h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--success);
+        }
+
+        .order-success p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Loading shimmer */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 0 12px;
+            }
+            .product-card { padding: 12px; }
+            .product-card .product-icon { width: 45px; height: 45px; font-size: 1.4rem; }
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 20px 20px 0 0;
+            }
+        }
+
+        /* Page transitions */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Orders page */
+        .order-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 0 20px 12px;
+        }
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .order-id {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .order-status {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .order-status.pending {
+            background: rgba(255,152,0,0.15);
+            color: var(--warning);
+        }
+
+        .order-status.awaiting_payment {
+            background: rgba(33,150,243,0.15);
+            color: #42a5f5;
+        }
+
+        .order-status.delivered {
+            background: rgba(76,175,80,0.15);
+            color: var(--success);
+        }
+
+        .order-items-list {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .order-total {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Profile page */
+        .profile-section {
+            padding: 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 12px;
+        }
+
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .profile-email {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .profile-menu-item:hover {
+            border-color: var(--primary);
+            background: var(--bg-card-hover);
+        }
+
+        .profile-menu-item .menu-icon {
+            font-size: 1.2rem;
+        }
+
+        .profile-menu-item .menu-text {
+            flex: 1;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-menu-item .menu-arrow {
+            color: var(--text-muted);
+        }
+
+        /* Payment Styles */
+        .payment-step {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            background: rgba(0,137,123,0.05);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: rgba(0,137,123,0.08);
+            box-shadow: 0 0 20px rgba(0,137,123,0.1);
+        }
+
+        .payment-method .pm-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0,137,123,0.15), rgba(0,137,123,0.05));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .payment-method.selected .pm-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .payment-method .pm-info {
+            flex: 1;
+        }
+
+        .payment-method .pm-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .payment-method .pm-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .payment-method .pm-check {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .payment-method.selected .pm-check {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .payment-method.selected .pm-check::after {
+            content: '✓';
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .payment-form {
+            margin-top: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Cairo';
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bank-info-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(0,137,123,0.05));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 14px;
+        }
+
+        .bank-info-box .bank-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bank-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .bank-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .bank-info-row .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .bank-info-row .value {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            direction: ltr;
+        }
+
+        .copy-btn {
+            background: rgba(0,137,123,0.15);
+            border: none;
+            border-radius: 6px;
+            color: var(--primary-light);
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-family: 'Cairo';
+            margin-right: 8px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .wallet-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .wallet-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .wallet-option:hover, .wallet-option.selected {
+            border-color: var(--primary);
+            background: rgba(0,137,123,0.05);
+        }
+
+        .wallet-option .wallet-logo {
+            font-size: 1.2rem;
+        }
+
+        .wallet-option .wallet-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .payment-summary {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 16px 0;
+        }
+
+        .payment-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .payment-summary-row.total {
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            margin-top: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        .payment-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(76,175,80,0.08);
+            border-radius: 10px;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .payment-note .note-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .step-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--primary);
+        }
+
+        .step-dot.done {
+            background: var(--success);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: 'Cairo';
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 16px;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--primary-light);
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        .instapay-qr {
+            text-align: center;
+            margin-top: 14px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .instapay-qr canvas {
+            border-radius: 8px;
+        }
+
+        .instapay-handle {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            direction: ltr;
+        }
+
+        /* Install banner */
+        .install-banner {
+            margin: 0 20px 16px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,137,123,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: var(--radius);
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .install-banner.show { display: flex; }
+
+        .install-banner .install-text {
+            flex: 1;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .install-banner .install-btn {
+            padding: 8px 16px;
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-dark);
+            font-family: 'Cairo';
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <div class="logo-icon">💊</div>
+            <h1>صيدلية مصر</h1>
+        </div>
+        <div class="header-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒
+                <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div class="page active" id="homePage">
+            <!-- Search -->
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="ابحث عن دواء أو مستحضر تجميل..." oninput="handleSearch(this.value)">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+
+            <!-- Install Banner -->
+            <div class="install-banner" id="installBanner">
+                <span style="font-size:1.5rem">📱</span>
+                <span class="install-text">ثبّت التطبيق على جهازك للوصول السريع بدون انترنت</span>
+                <button class="install-btn" onclick="installApp()">تثبيت</button>
+            </div>
+
+            <!-- Categories -->
+            <div class="categories">
+                <div class="categories-scroll">
+                    <button class="cat-btn active" onclick="filterCategory('all')">🏪 الكل</button>
+                    <button class="cat-btn" onclick="filterCategory('pain')">💊 مسكنات</button>
+                    <button class="cat-btn" onclick="filterCategory('antibiotic')">🦠 مضادات حيوية</button>
+                    <button class="cat-btn" onclick="filterCategory('stomach')">🫁 الجهاز الهضمي</button>
+                    <button class="cat-btn" onclick="filterCategory('heart')">❤️ القلب والضغط</button>
+                    <button class="cat-btn" onclick="filterCategory('diabetes')">🩸 السكري</button>
+                    <button class="cat-btn" onclick="filterCategory('vitamin')">💪 فيتامينات</button>
+                    <button class="cat-btn" onclick="filterCategory('skin')">🧴 العناية بالبشرة</button>
+                    <button class="cat-btn" onclick="filterCategory('hair')">💇 العناية بالشعر</button>
+                    <button class="cat-btn" onclick="filterCategory('cosmetic')">💄 مستحضرات تجميل</button>
+                    <button class="cat-btn" onclick="filterCategory('baby')">👶 أطفال</button>
+                    <button class="cat-btn" onclick="filterCategory('eye')">👁️ العيون</button>
+                    <button class="cat-btn" onclick="filterCategory('allergy')">🤧 الحساسية</button>
+                    <button class="cat-btn" onclick="filterCategory('cold')">🤒 البرد والإنفلونزا</button>
+                </div>
+            </div>
+
+            <!-- Banner -->
+            <div class="banner">
+                <h2>🎉 عروض الصيف</h2>
+                <p>خصومات تصل إلى 30% على مستحضرات التجميل والعناية بالبشرة</p>
+                <span class="banner-badge">⚡ عرض محدود</span>
+            </div>
+
+            <!-- Products -->
+            <div class="section-title">
+                <h2 id="sectionTitle">جميع المنتجات</h2>
+                <span class="count" id="productCount"></span>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+
+        <!-- Orders Page -->
+        <div class="page" id="ordersPage">
+            <div class="section-title" style="padding-top:20px">
+                <h2>طلباتي</h2>
+            </div>
+            <div id="ordersList"></div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profilePage">
+            <div class="profile-section">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-name">مستخدم صيدلية مصر</div>
+                    <div class="profile-email">user@egyptpharmacy.com</div>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">📍</span>
+                    <span class="menu-text">عناوين التوصيل</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">💳</span>
+                    <span class="menu-text">وسائل الدفع</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">🔔</span>
+                    <span class="menu-text">الإشعارات</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">🌙</span>
+                    <span class="menu-text">الوضع الليلي</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">📞</span>
+                    <span class="menu-text">تواصل معنا</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+                <div class="profile-menu-item">
+                    <span class="menu-icon">⭐</span>
+                    <span class="menu-text">قيّم التطبيق</span>
+                    <span class="menu-arrow">‹</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('home')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">الرئيسية</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('orders')">
+            <span class="nav-icon">📦</span>
+            <span class="nav-label">طلباتي</span>
+        </button>
+        <button class="nav-item" onclick="openCart()">
+            <span class="nav-icon">🛒</span>
+            <span class="nav-label">السلة</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('profile')">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">حسابي</span>
+        </button>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>🛒 سلة المشتريات</h2>
+                <button class="modal-close" onclick="closeCart()">✕</button>
+            </div>
+            <div id="cartContent"></div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay detail-modal" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>تفاصيل المنتج</h2>
+                <button class="modal-close" onclick="closeDetail()">✕</button>
+            </div>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+    // ==========================================
+    // Egyptian Pharmacy Database
+    // ==========================================
+    const products = [
+        // === مسكنات ومضادات الالتهاب ===
+        { id: 1, name: "بانادول أقراص", generic: "باراسيتامول 500 مجم", price: 21.75, category: "pain", icon: "💊", type: "otc", company: "جلاكسو سميثكلاين", form: "أقراص", pack: "24 قرص" },
+        { id: 2, name: "بروفين 400", generic: "إيبوبروفين 400 مجم", price: 30.00, category: "pain", icon: "💊", type: "otc", company: "أبوت", form: "أقراص", pack: "20 قرص" },
+        { id: 3, name: "كتافلام 50", generic: "ديكلوفيناك بوتاسيوم 50 مجم", price: 36.00, category: "pain", icon: "💊", type: "otc", company: "نوفارتس", form: "أقراص", pack: "20 قرص" },
+        { id: 4, name: "فولتارين جل", generic: "ديكلوفيناك صوديوم 1%", price: 52.50, category: "pain", icon: "🧴", type: "otc", company: "نوفارتس", form: "جل", pack: "50 جم" },
+        { id: 5, name: "ترامادول 50", generic: "ترامادول هيدروكلوريد", price: 18.00, category: "pain", icon: "💊", type: "rx", company: "سيجما", form: "كبسولات", pack: "10 كبسولة" },
+        { id: 6, name: "كيتوفان 100", generic: "كيتوبروفين 100 مجم", price: 28.50, category: "pain", icon: "💊", type: "otc", company: "آمون", form: "كبسولات", pack: "20 كبسولة" },
+        { id: 7, name: "أدول إكسترا", generic: "باراسيتامول + كافيين", price: 24.00, category: "pain", icon: "💊", type: "otc", company: "جلفار", form: "أقراص", pack: "24 قرص" },
+        { id: 8, name: "نابروكسين 500", generic: "نابروكسين صوديوم", price: 42.00, category: "pain", icon: "💊", type: "rx", company: "إيبيكو", form: "أقراص", pack: "20 قرص" },
+        { id: 9, name: "سيليبريكس 200", generic: "سيليكوكسيب 200 مجم", price: 120.00, category: "pain", icon: "💊", type: "rx", company: "فايزر", form: "كبسولات", pack: "10 كبسولة" },
+        { id: 10, name: "أولفين جل", generic: "ديكلوفيناك ديثيل أمين", price: 35.00, category: "pain", icon: "🧴", type: "otc", company: "ميباكو", form: "جل", pack: "40 جم" },
+
+        // === مضادات حيوية ===
+        { id: 11, name: "أوجمنتين 1 جم", generic: "أموكسيسيللين + كلافيولانيك", price: 96.00, category: "antibiotic", icon: "💊", type: "rx", company: "جلاكسو سميثكلاين", form: "أقراص", pack: "14 قرص" },
+        { id: 12, name: "كلافوكس 625", generic: "أموكسيسيللين + كلافيولانيك", price: 72.00, category: "antibiotic", icon: "💊", type: "rx", company: "فاركو", form: "أقراص", pack: "14 قرص" },
+        { id: 13, name: "هايبيوتك 1 جم", generic: "أموكسيسيللين + كلافيولانيك", price: 85.00, category: "antibiotic", icon: "💊", type: "rx", company: "آمون", form: "أقراص", pack: "14 قرص" },
+        { id: 14, name: "زيثروماكس 500", generic: "أزيثروميسين 500 مجم", price: 72.00, category: "antibiotic", icon: "💊", type: "rx", company: "فايزر", form: "أقراص", pack: "3 أقراص" },
+        { id: 15, name: "سيبروفلوكساسين 500", generic: "سيبروفلوكساسين", price: 30.00, category: "antibiotic", icon: "💊", type: "rx", company: "إيبيكو", form: "أقراص", pack: "10 أقراص" },
+        { id: 16, name: "فلاجيل 500", generic: "ميترونيدازول 500 مجم", price: 15.00, category: "antibiotic", icon: "💊", type: "rx", company: "سانوفي", form: "أقراص", pack: "20 قرص" },
+        { id: 17, name: "كيورام 625", generic: "أموكسيسيللين + كلافيولانيك", price: 68.00, category: "antibiotic", icon: "💊", type: "rx", company: "سيديكو", form: "أقراص", pack: "14 قرص" },
+        { id: 18, name: "تافانيك 500", generic: "ليفوفلوكساسين 500 مجم", price: 95.00, category: "antibiotic", icon: "💊", type: "rx", company: "سانوفي", form: "أقراص", pack: "5 أقراص" },
+        { id: 19, name: "يونيكتام 750", generic: "سلتاميسيللين", price: 60.00, category: "antibiotic", icon: "💊", type: "rx", company: "سيديكو", form: "أقراص", pack: "12 قرص" },
+        { id: 20, name: "كلاسيد 500", generic: "كلاريثروميسين 500 مجم", price: 78.00, category: "antibiotic", icon: "💊", type: "rx", company: "أبوت", form: "أقراص", pack: "14 قرص" },
+
+        // === الجهاز الهضمي ===
+        { id: 21, name: "نيكسيوم 40", generic: "إيزوميبرازول 40 مجم", price: 126.00, category: "stomach", icon: "💊", type: "rx", company: "أسترازينيكا", form: "كبسولات", pack: "14 كبسولة" },
+        { id: 22, name: "كونترولوك 40", generic: "بانتوبرازول 40 مجم", price: 84.00, category: "stomach", icon: "💊", type: "rx", company: "تاكيدا", form: "أقراص", pack: "14 قرص" },
+        { id: 23, name: "أنتودين 40", generic: "فاموتيدين 40 مجم", price: 21.00, category: "stomach", icon: "💊", type: "otc", company: "آمون", form: "أقراص", pack: "14 قرص" },
+        { id: 24, name: "موتيليوم 10", generic: "دومبيريدون 10 مجم", price: 27.00, category: "stomach", icon: "💊", type: "otc", company: "جانسن", form: "أقراص", pack: "30 قرص" },
+        { id: 25, name: "دوسباتالين ريتارد", generic: "ميبيفيرين 200 مجم", price: 66.00, category: "stomach", icon: "💊", type: "rx", company: "أبوت", form: "كبسولات", pack: "30 كبسولة" },
+        { id: 26, name: "انتينال", generic: "نيفوروكسازيد 200 مجم", price: 18.00, category: "stomach", icon: "💊", type: "otc", company: "آمون", form: "كبسولات", pack: "24 كبسولة" },
+        { id: 27, name: "فوسفالوجيل", generic: "فوسفات الألومنيوم", price: 30.00, category: "stomach", icon: "🧴", type: "otc", company: "سانوفي", form: "أكياس", pack: "12 كيس" },
+        { id: 28, name: "نيكسيوم 20", generic: "إيزوميبرازول 20 مجم", price: 84.00, category: "stomach", icon: "💊", type: "rx", company: "أسترازينيكا", form: "كبسولات", pack: "14 كبسولة" },
+        { id: 29, name: "جاست ريج", generic: "ترايميبوتين ماليات", price: 45.00, category: "stomach", icon: "💊", type: "otc", company: "جلوبال نابي", form: "أقراص", pack: "30 قرص" },
+        { id: 30, name: "دايجينورم", generic: "إنزيمات هاضمة", price: 30.00, category: "stomach", icon: "💊", type: "otc", company: "جلوبال نابي", form: "أقراص", pack: "30 قرص" },
+
+        // === القلب والضغط ===
+        { id: 31, name: "كونكور 5", generic: "بيسوبرولول 5 مجم", price: 60.00, category: "heart", icon: "💊", type: "rx", company: "ميرك", form: "أقراص", pack: "30 قرص" },
+        { id: 32, name: "بلافيكس 75", generic: "كلوبيدوجريل 75 مجم", price: 60.00, category: "heart", icon: "💊", type: "rx", company: "سانوفي", form: "أقراص", pack: "14 قرص" },
+        { id: 33, name: "زيستريل 10", generic: "ليسينوبريل 10 مجم", price: 42.00, category: "heart", icon: "💊", type: "rx", company: "أسترازينيكا", form: "أقراص", pack: "14 قرص" },
+        { id: 34, name: "أملور 5", generic: "أملوديبين 5 مجم", price: 30.00, category: "heart", icon: "💊", type: "rx", company: "فايزر", form: "أقراص", pack: "30 قرص" },
+        { id: 35, name: "كريستور 10", generic: "روزوفاستاتين 10 مجم", price: 108.00, category: "heart", icon: "💊", type: "rx", company: "أسترازينيكا", form: "أقراص", pack: "28 قرص" },
+        { id: 36, name: "أسبوسيد 75", generic: "أسبرين 75 مجم", price: 9.00, category: "heart", icon: "💊", type: "otc", company: "كيميفارم", form: "أقراص", pack: "20 قرص" },
+        { id: 37, name: "كوفرسيل 5", generic: "بيريندوبريل 5 مجم", price: 57.00, category: "heart", icon: "💊", type: "rx", company: "سرفييه", form: "أقراص", pack: "30 قرص" },
+        { id: 38, name: "ليبيتور 20", generic: "أتورفاستاتين 20 مجم", price: 90.00, category: "heart", icon: "💊", type: "rx", company: "فايزر", form: "أقراص", pack: "14 قرص" },
+        { id: 39, name: "ديوفان 80", generic: "فالسارتان 80 مجم", price: 72.00, category: "heart", icon: "💊", type: "rx", company: "نوفارتس", form: "أقراص", pack: "28 قرص" },
+        { id: 40, name: "إنالابريل 10", generic: "إنالابريل ماليات", price: 15.00, category: "heart", icon: "💊", type: "rx", company: "إيبيكو", form: "أقراص", pack: "10 أقراص" },
+
+        // === السكري ===
+        { id: 41, name: "جلوكوفاج 1000", generic: "ميتفورمين 1000 مجم", price: 30.00, category: "diabetes", icon: "💊", type: "rx", company: "ميرك", form: "أقراص", pack: "30 قرص" },
+        { id: 42, name: "جلوكوفاج 500", generic: "ميتفورمين 500 مجم", price: 18.00, category: "diabetes", icon: "💊", type: "rx", company: "ميرك", form: "أقراص", pack: "30 قرص" },
+        { id: 43, name: "أماريل 2", generic: "جليميبيريد 2 مجم", price: 42.00, category: "diabetes", icon: "💊", type: "rx", company: "سانوفي", form: "أقراص", pack: "30 قرص" },
+        { id: 44, name: "جانوفيا 100", generic: "سيتاجليبتين 100 مجم", price: 210.00, category: "diabetes", icon: "💊", type: "rx", company: "MSD", form: "أقراص", pack: "28 قرص" },
+        { id: 45, name: "لانتوس سولوستار", generic: "إنسولين جلارجين", price: 270.00, category: "diabetes", icon: "💉", type: "rx", company: "سانوفي", form: "قلم", pack: "قلم واحد" },
+        { id: 46, name: "نوفورابيد فلكس بن", generic: "إنسولين أسبارت", price: 195.00, category: "diabetes", icon: "💉", type: "rx", company: "نوفو نورديسك", form: "قلم", pack: "قلم واحد" },
+        { id: 47, name: "جارديانس 10", generic: "إمباغليفلوزين 10 مجم", price: 180.00, category: "diabetes", icon: "💊", type: "rx", company: "بوهرنجر", form: "أقراص", pack: "30 قرص" },
+        { id: 48, name: "فيكتوزا", generic: "ليراجلوتيد", price: 850.00, category: "diabetes", icon: "💉", type: "rx", company: "نوفو نورديسك", form: "قلم", pack: "قلم واحد" },
+        { id: 49, name: "داياميكرون MR 60", generic: "جليكلازيد 60 مجم", price: 60.00, category: "diabetes", icon: "💊", type: "rx", company: "سرفييه", form: "أقراص", pack: "30 قرص" },
+        { id: 50, name: "جالفس مت 50/1000", generic: "فيلداجليبتين + ميتفورمين", price: 135.00, category: "diabetes", icon: "💊", type: "rx", company: "نوفارتس", form: "أقراص", pack: "30 قرص" },
+
+        // === فيتامينات ===
+        { id: 51, name: "فيتاسيد ج", generic: "فيتامين سي 1000 مجم", price: 12.00, category: "vitamin", icon: "💊", type: "otc", company: "كيميفارم", form: "أقراص فوارة", pack: "10 أقراص" },
+        { id: 52, name: "سوبرافيت", generic: "فيتامينات متعددة + معادن", price: 36.00, category: "vitamin", icon: "💊", type: "otc", company: "كيميفارم", form: "كبسولات", pack: "20 كبسولة" },
+        { id: 53, name: "أوميجا 3 بلس", generic: "زيت السمك 1000 مجم", price: 45.00, category: "vitamin", icon: "💊", type: "otc", company: "سيديكو", form: "كبسولات", pack: "20 كبسولة" },
+        { id: 54, name: "كالسيترون", generic: "كالسيوم + فيتامين د3", price: 30.00, category: "vitamin", icon: "💊", type: "otc", company: "آمون", form: "أقراص", pack: "20 قرص" },
+        { id: 55, name: "فيروجلوبين", generic: "حديد + فيتامينات", price: 72.00, category: "vitamin", icon: "💊", type: "otc", company: "فيتابيوتكس", form: "كبسولات", pack: "30 كبسولة" },
+        { id: 56, name: "بيكوزيم فورت", generic: "فيتامين ب مركب", price: 24.00, category: "vitamin", icon: "💊", type: "otc", company: "كيميفارم", form: "أقراص", pack: "20 قرص" },
+        { id: 57, name: "فيتامين د3 1000", generic: "كوليكالسيفيرول", price: 42.00, category: "vitamin", icon: "💊", type: "otc", company: "إيفا فارما", form: "كبسولات", pack: "30 كبسولة" },
+        { id: 58, name: "زنك أوريجينال", generic: "زنك 50 مجم", price: 60.00, category: "vitamin", icon: "💊", type: "otc", company: "إيفا فارما", form: "كبسولات", pack: "30 كبسولة" },
+        { id: 59, name: "فوليك أسيد", generic: "حمض الفوليك 5 مجم", price: 9.00, category: "vitamin", icon: "💊", type: "otc", company: "النيل", form: "أقراص", pack: "20 قرص" },
+        { id: 60, name: "سنتروم سيلفر", generic: "فيتامينات متعددة للكبار", price: 195.00, category: "vitamin", icon: "💊", type: "otc", company: "فايزر", form: "أقراص", pack: "30 قرص" },
+
+        // === العناية بالبشرة ===
+        { id: 61, name: "بيوديرما سينسيبيو", generic: "ماء ميسيلار منظف", price: 350.00, category: "skin", icon: "🧴", type: "otc", company: "بيوديرما", form: "محلول", pack: "500 مل" },
+        { id: 62, name: "لاروش بوزيه إيفاكلار", generic: "جل منظف للبشرة الدهنية", price: 420.00, category: "skin", icon: "🧴", type: "otc", company: "لاروش بوزيه", form: "جل", pack: "200 مل" },
+        { id: 63, name: "سيتافيل مرطب", generic: "مرطب للبشرة الحساسة", price: 280.00, category: "skin", icon: "🧴", type: "otc", company: "سيتافيل", form: "كريم", pack: "250 جم" },
+        { id: 64, name: "أفين ترمال واتر", generic: "بخاخ ماء حراري", price: 220.00, category: "skin", icon: "🧴", type: "otc", company: "أفين", form: "بخاخ", pack: "150 مل" },
+        { id: 65, name: "فيشي مينرال 89", generic: "سيروم ترطيب يومي", price: 480.00, category: "skin", icon: "🧴", type: "otc", company: "فيشي", form: "سيروم", pack: "50 مل" },
+        { id: 66, name: "بيزلين واقي شمس", generic: "SPF 50+ واقي شمسي", price: 180.00, category: "skin", icon: "🧴", type: "otc", company: "بيزلين", form: "كريم", pack: "60 مل" },
+        { id: 67, name: "ديرماميد كريم مرطب", generic: "مرطب للبشرة الجافة", price: 85.00, category: "skin", icon: "🧴", type: "otc", company: "يونيفارما", form: "كريم", pack: "100 جم" },
+        { id: 68, name: "سكينورين كريم", generic: "حمض الأزيليك 20%", price: 75.00, category: "skin", icon: "🧴", type: "rx", company: "باير", form: "كريم", pack: "30 جم" },
+        { id: 69, name: "ديفرين جل", generic: "أدابالين 0.1%", price: 45.00, category: "skin", icon: "🧴", type: "rx", company: "جالديرما", form: "جل", pack: "30 جم" },
+        { id: 70, name: "هيالورونيك أسيد سيروم", generic: "حمض الهيالورونيك", price: 150.00, category: "skin", icon: "🧴", type: "otc", company: "إيفا فارما", form: "سيروم", pack: "30 مل" },
+
+        // === العناية بالشعر ===
+        { id: 71, name: "هيرتون كبسولات", generic: "مكمل غذائي للشعر", price: 72.00, category: "hair", icon: "💊", type: "otc", company: "فاركو", form: "كبسولات", pack: "36 كبسولة" },
+        { id: 72, name: "بانتوجار", generic: "كيراتين + خميرة طبية", price: 180.00, category: "hair", icon: "💊", type: "otc", company: "ميرك", form: "كبسولات", pack: "90 كبسولة" },
+        { id: 73, name: "مينوكسيديل 5%", generic: "مينوكسيديل محلول", price: 90.00, category: "hair", icon: "🧴", type: "otc", company: "هاير بلس", form: "محلول", pack: "50 مل" },
+        { id: 74, name: "بيبانثين شامبو", generic: "شامبو مضاد للقشرة", price: 140.00, category: "hair", icon: "🧴", type: "otc", company: "باير", form: "شامبو", pack: "200 مل" },
+        { id: 75, name: "نيزورال شامبو", generic: "كيتوكونازول 2%", price: 120.00, category: "hair", icon: "🧴", type: "otc", company: "جانسن", form: "شامبو", pack: "100 مل" },
+        { id: 76, name: "بيوتين 10000", generic: "بيوتين", price: 95.00, category: "hair", icon: "💊", type: "otc", company: "ناتشرال فاكتورز", form: "كبسولات", pack: "60 كبسولة" },
+        { id: 77, name: "هير فيت زيت", generic: "زيت تقوية الشعر", price: 65.00, category: "hair", icon: "🧴", type: "otc", company: "فاتيكا", form: "زيت", pack: "200 مل" },
+        { id: 78, name: "فيناسترايد 1", generic: "فيناسترايد 1 مجم", price: 120.00, category: "hair", icon: "💊", type: "rx", company: "MSD", form: "أقراص", pack: "28 قرص" },
+
+        // === مستحضرات تجميل ===
+        { id: 79, name: "ماك فاونديشن", generic: "كريم أساس مخملي", price: 750.00, category: "cosmetic", icon: "💄", type: "otc", company: "ماك", form: "كريم", pack: "30 مل" },
+        { id: 80, name: "لوريال ماسكارا فوليوم", generic: "ماسكارا لتكثيف الرموش", price: 220.00, category: "cosmetic", icon: "💄", type: "otc", company: "لوريال", form: "ماسكارا", pack: "قطعة" },
+        { id: 81, name: "ميبلين سوبرستاي", generic: "أحمر شفاه ثابت", price: 180.00, category: "cosmetic", icon: "💄", type: "otc", company: "ميبلين", form: "أحمر شفاه", pack: "قطعة" },
+        { id: 82, name: "نيفيا كريم ترطيب", generic: "كريم ترطيب متعدد الاستخدام", price: 45.00, category: "cosmetic", icon: "🧴", type: "otc", company: "نيفيا", form: "كريم", pack: "150 مل" },
+        { id: 83, name: "إن واي إكس كونسيلر", generic: "كونسيلر تغطية كاملة", price: 320.00, category: "cosmetic", icon: "💄", type: "otc", company: "NYX", form: "كونسيلر", pack: "قطعة" },
+        { id: 84, name: "إيسنس آيلاينر", generic: "آيلاينر سائل أسود", price: 85.00, category: "cosmetic", icon: "💄", type: "otc", company: "إيسنس", form: "آيلاينر", pack: "قطعة" },
+        { id: 85, name: "بورجوا بلاشر", generic: "بلاشر خدود ناعم", price: 290.00, category: "cosmetic", icon: "💄", type: "otc", company: "بورجوا", form: "بلاشر", pack: "قطعة" },
+        { id: 86, name: "غارنييه ميسيلار", generic: "ماء ميسيلار لإزالة المكياج", price: 95.00, category: "cosmetic", icon: "🧴", type: "otc", company: "غارنييه", form: "محلول", pack: "400 مل" },
+        { id: 87, name: "فازلين لوشن", generic: "لوشن ترطيب الجسم", price: 65.00, category: "cosmetic", icon: "🧴", type: "otc", company: "فازلين", form: "لوشن", pack: "400 مل" },
+        { id: 88, name: "ريفلون كولرستاي", generic: "كريم أساس طويل الثبات", price: 450.00, category: "cosmetic", icon: "💄", type: "otc", company: "ريفلون", form: "كريم", pack: "30 مل" },
+
+        // === أطفال ===
+        { id: 89, name: "كالبول شراب", generic: "باراسيتامول للأطفال", price: 18.00, category: "baby", icon: "🍼", type: "otc", company: "جلاكسو", form: "شراب", pack: "100 مل" },
+        { id: 90, name: "نيوروفين للأطفال", generic: "إيبوبروفين شراب", price: 36.00, category: "baby", icon: "🍼", type: "otc", company: "ريكيت", form: "شراب", pack: "100 مل" },
+        { id: 91, name: "فلاجيل شراب", generic: "ميترونيدازول للأطفال", price: 12.00, category: "baby", icon: "🍼", type: "rx", company: "سانوفي", form: "شراب", pack: "120 مل" },
+        { id: 92, name: "سيبتازول شراب", generic: "كوتريموكسازول للأطفال", price: 15.00, category: "baby", icon: "🍼", type: "rx", company: "جلاكسو", form: "شراب", pack: "100 مل" },
+        { id: 93, name: "دينتينوكس نقط", generic: "نقط مغص الأطفال", price: 24.00, category: "baby", icon: "🍼", type: "otc", company: "دينتينوكس", form: "نقط", pack: "100 مل" },
+        { id: 94, name: "بيبي كريم حفاضات", generic: "كريم حماية من التسلخات", price: 35.00, category: "baby", icon: "🧴", type: "otc", company: "سانوسان", form: "كريم", pack: "100 جم" },
+        { id: 95, name: "ريهيدران أكياس", generic: "أملاح إعادة الترطيب", price: 12.00, category: "baby", icon: "💊", type: "otc", company: "كيميفارم", form: "أكياس", pack: "10 أكياس" },
+
+        // === العيون ===
+        { id: 96, name: "تيرز ناتشورال", generic: "قطرة ترطيب العين", price: 72.00, category: "eye", icon: "👁️", type: "otc", company: "ألكون", form: "قطرة", pack: "15 مل" },
+        { id: 97, name: "توبرادكس قطرة", generic: "توبراميسين + ديكساميثازون", price: 42.00, category: "eye", icon: "👁️", type: "rx", company: "ألكون", form: "قطرة", pack: "5 مل" },
+        { id: 98, name: "ريفريش تيرز", generic: "قطرة جفاف العين", price: 95.00, category: "eye", icon: "👁️", type: "otc", company: "أليرجان", form: "قطرة", pack: "15 مل" },
+        { id: 99, name: "تيمولول 0.5%", generic: "تيمولول ماليات", price: 18.00, category: "eye", icon: "👁️", type: "rx", company: "إيبيكو", form: "قطرة", pack: "5 مل" },
+        { id: 100, name: "فيجاموكس قطرة", generic: "موكسيفلوكساسين 0.5%", price: 55.00, category: "eye", icon: "👁️", type: "rx", company: "ألكون", form: "قطرة", pack: "5 مل" },
+
+        // === الحساسية ===
+        { id: 101, name: "زيرتك 10", generic: "سيتريزين 10 مجم", price: 36.00, category: "allergy", icon: "💊", type: "otc", company: "UCB", form: "أقراص", pack: "20 قرص" },
+        { id: 102, name: "كلاريتين 10", generic: "لوراتادين 10 مجم", price: 36.00, category: "allergy", icon: "💊", type: "otc", company: "باير", form: "أقراص", pack: "20 قرص" },
+        { id: 103, name: "تلفاست 180", generic: "فيكسوفينادين 180 مجم", price: 54.00, category: "allergy", icon: "💊", type: "otc", company: "سانوفي", form: "أقراص", pack: "15 قرص" },
+        { id: 104, name: "أفيل أقراص", generic: "فينيرامين", price: 12.00, category: "allergy", icon: "💊", type: "otc", company: "سانوفي", form: "أقراص", pack: "20 قرص" },
+        { id: 105, name: "ناسونكس بخاخ", generic: "موميتازون فيوروات", price: 85.00, category: "allergy", icon: "🫁", type: "rx", company: "MSD", form: "بخاخ أنف", pack: "120 بخة" },
+        { id: 106, name: "ديسلور 5", generic: "ديسلوراتادين 5 مجم", price: 42.00, category: "allergy", icon: "💊", type: "otc", company: "آمون", form: "أقراص", pack: "20 قرص" },
+
+        // === البرد والإنفلونزا ===
+        { id: 107, name: "كومتركس", generic: "باراسيتامول + كلورفينرامين", price: 24.00, category: "cold", icon: "💊", type: "otc", company: "بريستول", form: "أقراص", pack: "20 قرص" },
+        { id: 108, name: "كونجستال", generic: "باراسيتامول + سودوإفدرين", price: 18.00, category: "cold", icon: "💊", type: "otc", company: "آمون", form: "أقراص", pack: "20 قرص" },
+        { id: 109, name: "فلورست إن", generic: "باراسيتامول + فينيل إفرين", price: 15.00, category: "cold", icon: "💊", type: "otc", company: "إيبيكو", form: "أقراص", pack: "20 قرص" },
+        { id: 110, name: "123 أقراص", generic: "باراسيتامول + كلورفينرامين + سودوإفدرين", price: 12.00, category: "cold", icon: "💊", type: "otc", company: "إيبيكو", form: "أقراص", pack: "20 قرص" },
+        { id: 111, name: "أوتريفين نقط أنف", generic: "زايلوميتازولين", price: 15.00, category: "cold", icon: "🫁", type: "otc", company: "نوفارتس", form: "نقط", pack: "15 مل" },
+        { id: 112, name: "سينوبريت", generic: "خلاصة أعشاب طبيعية", price: 65.00, category: "cold", icon: "💊", type: "otc", company: "بيونوريكا", form: "أقراص", pack: "50 قرص" },
+        { id: 113, name: "أمبروكسول شراب", generic: "أمبروكسول هيدروكلوريد", price: 18.00, category: "cold", icon: "🍼", type: "otc", company: "آمون", form: "شراب", pack: "100 مل" },
+        { id: 114, name: "بنادول كولد آند فلو", generic: "باراسيتامول + فينيل إفرين + كلورفينرامين", price: 30.00, category: "cold", icon: "💊", type: "otc", company: "جلاكسو", form: "أقراص", pack: "24 قرص" },
+        { id: 115, name: "ستربسلز", generic: "أقراص استحلاب للحلق", price: 27.00, category: "cold", icon: "💊", type: "otc", company: "ريكيت", form: "أقراص استحلاب", pack: "24 قرص" },
+
+        // === المزيد من الأدوية الشائعة ===
+        { id: 116, name: "أوميز 20", generic: "أوميبرازول 20 مجم", price: 30.00, category: "stomach", icon: "💊", type: "rx", company: "إيبيكو", form: "كبسولات", pack: "14 كبسولة" },
+        { id: 117, name: "ليريكا 75", generic: "بريجابالين 75 مجم", price: 84.00, category: "pain", icon: "💊", type: "rx", company: "فايزر", form: "كبسولات", pack: "14 كبسولة" },
+        { id: 118, name: "تريتيكو 50", generic: "ترازودون 50 مجم", price: 36.00, category: "pain", icon: "💊", type: "rx", company: "أنجيليني", form: "أقراص", pack: "30 قرص" },
+        { id: 119, name: "ليبراكس", generic: "كليدينيوم + كلورديازيبوكسيد", price: 18.00, category: "stomach", icon: "💊", type: "rx", company: "فاليانت", form: "كبسولات", pack: "30 كبسولة" },
+        { id: 120, name: "ديكلاك 150", generic: "ديكلوفيناك صوديوم 150 مجم", price: 36.00, category: "pain", icon: "💊", type: "rx", company: "هيكسال", form: "أقراص", pack: "20 قرص" },
+    ];
+
+    // ==========================================
+    // App State
+    // ==========================================
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    // ==========================================
+    // Initialize
+    // ==========================================
+    function init() {
+        renderProducts();
+        updateCartBadge();
+        registerSW();
+        checkInstallPrompt();
+    }
+
+    // ==========================================
+    // Service Worker
+    // ==========================================
+    function registerSW() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+    }
+
+    // ==========================================
+    // Install Prompt
+    // ==========================================
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('installBanner').classList.add('show');
+    });
+
+    function installApp() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(() => {
+                deferredPrompt = null;
+                document.getElementById('installBanner').classList.remove('show');
+            });
+        }
+    }
+
+    function checkInstallPrompt() {
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.getElementById('installBanner').style.display = 'none';
+        }
+    }
+
+    // ==========================================
+    // Render Products
+    // ==========================================
+    function renderProducts() {
+        const grid = document.getElementById('productsGrid');
+        let filtered = products;
+
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === currentCategory);
+        }
+
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            filtered = filtered.filter(p =>
+                p.name.toLowerCase().includes(q) ||
+                p.generic.toLowerCase().includes(q) ||
+                p.company.toLowerCase().includes(q)
+            );
+        }
+
+        document.getElementById('productCount').textContent = `${filtered.length} منتج`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted)">
+                    <div style="font-size:3rem;margin-bottom:12px">🔍</div>
+                    <p>لا توجد نتائج</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(product => `
+            <div class="product-card" onclick="showDetail(${product.id})">
+                <span class="badge-${product.type}">${product.type === 'rx' ? '⚕️ بوصفة' : '✓ بدون وصفة'}</span>
+                <div class="product-icon">${product.icon}</div>
+                <div class="product-name">${product.name}</div>
+                <div class="product-generic">${product.generic}</div>
+                <div class="product-price">
+                    <div class="price">${product.price.toFixed(2)} <span>ج.م</span></div>
+                    <button class="add-btn" onclick="event.stopPropagation();addToCart(${product.id})">+</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ==========================================
+    // Search
+    // ==========================================
+    function handleSearch(value) {
+        searchQuery = value;
+        renderProducts();
+    }
+
+    // ==========================================
+    // Categories
+    // ==========================================
+    function filterCategory(category) {
+        currentCategory = category;
+
+        const categoryNames = {
+            'all': 'جميع المنتجات', 'pain': 'المسكنات', 'antibiotic': 'المضادات الحيوية',
+            'stomach': 'الجهاز الهضمي', 'heart': 'القلب والضغط', 'diabetes': 'أدوية السكري',
+            'vitamin': 'الفيتامينات', 'skin': 'العناية بالبشرة', 'hair': 'العناية بالشعر',
+            'cosmetic': 'مستحضرات التجميل', 'baby': 'أدوية الأطفال', 'eye': 'أدوية العيون',
+            'allergy': 'أدوية الحساسية', 'cold': 'البرد والإنفلونزا'
+        };
+
+        document.getElementById('sectionTitle').textContent = categoryNames[category] || 'جميع المنتجات';
+
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        renderProducts();
+    }
+
+    // ==========================================
+    // Product Detail
+    // ==========================================
+    function showDetail(id) {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+
+        const content = document.getElementById('detailContent');
+        content.innerHTML = `
+            <div class="detail-header">
+                <div class="detail-icon">${product.icon}</div>
+                <h3>${product.name}</h3>
+                <div class="generic-name">${product.generic}</div>
+            </div>
+            <div class="detail-info">
+                <div class="detail-info-item">
+                    <div class="label">الشركة</div>
+                    <div class="value">${product.company}</div>
+                </div>
+                <div class="detail-info-item">
+                    <div class="label">الشكل</div>
+                    <div class="value">${product.form}</div>
+                </div>
+                <div class="detail-info-item">
+                    <div class="label">العبوة</div>
+                    <div class="value">${product.pack}</div>
+                </div>
+                <div class="detail-info-item">
+                    <div class="label">النوع</div>
+                    <div class="value">${product.type === 'rx' ? '⚕️ بوصفة طبية' : '✓ بدون وصفة'}</div>
+                </div>
+            </div>
+            <div class="detail-price">
+                <div class="price-value">${product.price.toFixed(2)} ج.م</div>
+                <div class="price-unit">السعر شامل الضريبة</div>
+            </div>
+            <button class="detail-add-btn" onclick="addToCart(${product.id});closeDetail()">
+                🛒 أضف إلى السلة
+            </button>
+        `;
+
+        document.getElementById('detailModal').classList.add('active');
+    }
+
+    function closeDetail() {
+        document.getElementById('detailModal').classList.remove('active');
+    }
+
+    // ==========================================
+    // Cart
+    // ==========================================
+    function addToCart(id) {
+        const existing = cart.find(item => item.id === id);
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({ id, qty: 1 });
+        }
+        saveCart();
+        updateCartBadge();
+        showToast('تمت الإضافة إلى السلة ✓');
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        saveCart();
+        updateCartBadge();
+        renderCart();
+    }
+
+    function updateQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(id);
+                return;
+            }
+        }
+        saveCart();
+        renderCart();
+    }
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartBadge() {
+        const badge = document.getElementById('cartBadge');
+        const total = cart.reduce((sum, item) => sum + item.qty, 0);
+        if (total > 0) {
+            badge.style.display = 'flex';
+            badge.textContent = total;
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function openCart() {
+        renderCart();
+        document.getElementById('cartModal').classList.add('active');
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').classList.remove('active');
+    }
+
+    function renderCart() {
+        const content = document.getElementById('cartContent');
+
+        if (cart.length === 0) {
+            content.innerHTML = `
+                <div class="empty-cart">
+                    <div class="empty-icon">🛒</div>
+                    <p>السلة فارغة</p>
+                    <p style="font-size:0.8rem;margin-top:8px">أضف منتجات للبدء</p>
+                </div>
+            `;
+            return;
+        }
+
+        let total = 0;
+        const items = cart.map(cartItem => {
+            const product = products.find(p => p.id === cartItem.id);
+            if (!product) return '';
+            const itemTotal = product.price * cartItem.qty;
+            total += itemTotal;
+            return `
+                <div class="cart-item">
+                    <div class="cart-item-icon">${product.icon}</div>
+                    <div class="cart-item-info">
+                        <div class="name">${product.name}</div>
+                        <div class="price">${itemTotal.toFixed(2)} ج.م</div>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button onclick="updateQty(${product.id}, -1)">-</button>
+                        <span>${cartItem.qty}</span>
+                        <button onclick="updateQty(${product.id}, 1)">+</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        content.innerHTML = `
+            ${items}
+            <div class="cart-total">
+                <span class="total-label">الإجمالي</span>
+                <span class="total-amount">${total.toFixed(2)} ج.م</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                إتمام الشراء 🎉
+            </button>
+        `;
+    }
+
+    // ==========================================
+    // Checkout & Payment System
+    // ==========================================
+    let selectedPaymentMethod = null;
+    let selectedWallet = null;
+    let checkoutTotal = 0;
+
+    function checkout() {
+        if (cart.length === 0) return;
+
+        checkoutTotal = cart.reduce((sum, item) => {
+            const product = products.find(p => p.id === item.id);
+            return sum + (product ? product.price * item.qty : 0);
+        }, 0);
+
+        const deliveryFee = checkoutTotal >= 200 ? 0 : 25;
+        const finalTotal = checkoutTotal + deliveryFee;
+
+        const content = document.getElementById('cartContent');
+        content.innerHTML = `
+            <div class="payment-step">
+                <button class="back-btn" onclick="renderCart()">→ العودة للسلة</button>
+                
+                <div class="step-indicator">
+                    <span class="step-dot done"></span>
+                    <span class="step-dot active"></span>
+                    <span class="step-dot"></span>
+                </div>
+
+                <h3 style="font-size:1rem;margin-bottom:4px">اختر طريقة الدفع</h3>
+                <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px">جميع المعاملات مؤمنة ومشفرة</p>
+
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPayment('card')">
+                        <div class="pm-icon">💳</div>
+                        <div class="pm-info">
+                            <div class="pm-name">بطاقة ائتمان / خصم مباشر</div>
+                            <div class="pm-desc">Visa, Mastercard, Meeza</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                    
+                    <div class="payment-method" onclick="selectPayment('wallet')">
+                        <div class="pm-icon">📱</div>
+                        <div class="pm-info">
+                            <div class="pm-name">المحفظة الإلكترونية</div>
+                            <div class="pm-desc">فودافون كاش، اتصالات كاش، أورانج كاش، WE Pay</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                    
+                    <div class="payment-method" onclick="selectPayment('bank')">
+                        <div class="pm-icon">🏦</div>
+                        <div class="pm-info">
+                            <div class="pm-name">تحويل بنكي</div>
+                            <div class="pm-desc">تحويل مباشر لحساب الصيدلية البنكي</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                    
+                    <div class="payment-method" onclick="selectPayment('instapay')">
+                        <div class="pm-icon">⚡</div>
+                        <div class="pm-info">
+                            <div class="pm-name">إنستاباي</div>
+                            <div class="pm-desc">تحويل فوري بين البنوك المصرية</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                    
+                    <div class="payment-method" onclick="selectPayment('fawry')">
+                        <div class="pm-icon">🏪</div>
+                        <div class="pm-info">
+                            <div class="pm-name">فوري</div>
+                            <div class="pm-desc">ادفع نقدًا من أقرب منفذ فوري</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                    
+                    <div class="payment-method" onclick="selectPayment('cod')">
+                        <div class="pm-icon">💵</div>
+                        <div class="pm-info">
+                            <div class="pm-name">الدفع عند الاستلام</div>
+                            <div class="pm-desc">ادفع نقدًا عند استلام الطلب</div>
+                        </div>
+                        <div class="pm-check"></div>
+                    </div>
+                </div>
+
+                <div class="payment-summary">
+                    <div class="payment-summary-row">
+                        <span>المنتجات (${cart.reduce((s,i) => s + i.qty, 0)} عنصر)</span>
+                        <span>${checkoutTotal.toFixed(2)} ج.م</span>
+                    </div>
+                    <div class="payment-summary-row">
+                        <span>رسوم التوصيل</span>
+                        <span>${deliveryFee === 0 ? 'مجانًا ✨' : deliveryFee.toFixed(2) + ' ج.م'}</span>
+                    </div>
+                    <div class="payment-summary-row total">
+                        <span>الإجمالي</span>
+                        <span>${finalTotal.toFixed(2)} ج.م</span>
+                    </div>
+                </div>
+
+                ${deliveryFee === 0 ? '<div class="payment-note"><span class="note-icon">🎉</span><span>مبروك! حصلت على توصيل مجاني لأن طلبك أكثر من 200 ج.م</span></div>' : '<div class="payment-note"><span class="note-icon">💡</span><span>أضف منتجات بقيمة ' + (200 - checkoutTotal).toFixed(0) + ' ج.م للحصول على توصيل مجاني</span></div>'}
+
+                <div class="secure-badge">🔒 جميع المعاملات مؤمنة بتشفير SSL</div>
+            </div>
+        `;
+
+        selectedPaymentMethod = null;
+    }
+
+    function selectPayment(method) {
+        selectedPaymentMethod = method;
+        
+        // Update UI selection
+        document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+
+        // Show payment form based on method
+        setTimeout(() => showPaymentForm(method), 200);
+    }
+
+    function showPaymentForm(method) {
+        const deliveryFee = checkoutTotal >= 200 ? 0 : 25;
+        const finalTotal = checkoutTotal + deliveryFee;
+        const content = document.getElementById('cartContent');
+
+        let formHTML = '';
+
+        switch(method) {
+            case 'card':
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">💳 بيانات البطاقة</h3>
+
+                        <div class="payment-form">
+                            <div class="form-group">
+                                <label>اسم صاحب البطاقة</label>
+                                <input type="text" placeholder="كما هو مكتوب على البطاقة" id="cardName">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم البطاقة</label>
+                                <input type="text" placeholder="0000 0000 0000 0000" id="cardNumber" maxlength="19" oninput="formatCardNumber(this)" dir="ltr" style="text-align:left;letter-spacing:2px">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>تاريخ الانتهاء</label>
+                                    <input type="text" placeholder="MM/YY" id="cardExpiry" maxlength="5" oninput="formatExpiry(this)" dir="ltr" style="text-align:left">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="password" placeholder="•••" id="cardCvv" maxlength="4" dir="ltr" style="text-align:left">
+                                </div>
+                            </div>
+
+                            <div class="payment-summary">
+                                <div class="payment-summary-row total">
+                                    <span>المبلغ المطلوب</span>
+                                    <span>${finalTotal.toFixed(2)} ج.م</span>
+                                </div>
+                            </div>
+
+                            <button class="checkout-btn" onclick="processPayment('card')">
+                                ادفع ${finalTotal.toFixed(2)} ج.م 💳
+                            </button>
+                            
+                            <div class="secure-badge">🔒 مؤمن بواسطة بوابة الدفع الإلكتروني المصرية</div>
+                        </div>
+                    </div>
+                `;
+                break;
+
+            case 'wallet':
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">📱 المحفظة الإلكترونية</h3>
+
+                        <div class="wallet-options">
+                            <div class="wallet-option" onclick="selectWallet(this, 'vodafone')">
+                                <span class="wallet-logo">🔴</span>
+                                <span class="wallet-name">فودافون كاش</span>
+                            </div>
+                            <div class="wallet-option" onclick="selectWallet(this, 'etisalat')">
+                                <span class="wallet-logo">🟢</span>
+                                <span class="wallet-name">اتصالات كاش</span>
+                            </div>
+                            <div class="wallet-option" onclick="selectWallet(this, 'orange')">
+                                <span class="wallet-logo">🟠</span>
+                                <span class="wallet-name">أورانج كاش</span>
+                            </div>
+                            <div class="wallet-option" onclick="selectWallet(this, 'we')">
+                                <span class="wallet-logo">🟣</span>
+                                <span class="wallet-name">WE Pay</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-form" style="margin-top:20px">
+                            <div class="form-group">
+                                <label>رقم المحفظة</label>
+                                <input type="tel" placeholder="01X XXXX XXXX" id="walletNumber" maxlength="11" dir="ltr" style="text-align:left;letter-spacing:1px">
+                            </div>
+
+                            <div class="payment-note">
+                                <span class="note-icon">📌</span>
+                                <span>سيتم إرسال رسالة تأكيد على رقم محفظتك لإتمام الدفع</span>
+                            </div>
+
+                            <div class="payment-summary">
+                                <div class="payment-summary-row total">
+                                    <span>المبلغ المطلوب</span>
+                                    <span>${finalTotal.toFixed(2)} ج.م</span>
+                                </div>
+                            </div>
+
+                            <button class="checkout-btn" onclick="processPayment('wallet')">
+                                تأكيد الدفع 📱
+                            </button>
+                        </div>
+                    </div>
+                `;
+                break;
+
+            case 'bank':
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">🏦 التحويل البنكي</h3>
+                        
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px">قم بتحويل المبلغ التالي إلى حساب الصيدلية البنكي:</p>
+
+                        <div class="payment-summary">
+                            <div class="payment-summary-row total">
+                                <span>المبلغ المطلوب تحويله</span>
+                                <span>${finalTotal.toFixed(2)} ج.م</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-info-box">
+                            <div class="bank-title">🏦 البنك الأهلي المصري (NBE)</div>
+                            <div class="bank-info-row">
+                                <span class="label">اسم الحساب</span>
+                                <span class="value">صيدلية مصر للأدوية <button class="copy-btn" onclick="copyText('صيدلية مصر للأدوية')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">رقم الحساب</span>
+                                <span class="value">0112-0345-6789-0001 <button class="copy-btn" onclick="copyText('0112034567890001')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">IBAN</span>
+                                <span class="value">EG380011200000345678900016 <button class="copy-btn" onclick="copyText('EG380011200000345678900016')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">SWIFT</span>
+                                <span class="value">NBEGEGCX <button class="copy-btn" onclick="copyText('NBEGEGCX')">نسخ</button></span>
+                            </div>
+                        </div>
+
+                        <div class="bank-info-box" style="margin-top:10px">
+                            <div class="bank-title">🏦 بنك مصر (Banque Misr)</div>
+                            <div class="bank-info-row">
+                                <span class="label">اسم الحساب</span>
+                                <span class="value">صيدلية مصر للأدوية <button class="copy-btn" onclick="copyText('صيدلية مصر للأدوية')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">رقم الحساب</span>
+                                <span class="value">1550-0078-9012-3456 <button class="copy-btn" onclick="copyText('1550007890123456')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">IBAN</span>
+                                <span class="value">EG210002015500078901234569 <button class="copy-btn" onclick="copyText('EG210002015500078901234569')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">SWIFT</span>
+                                <span class="value">BMISEGCX <button class="copy-btn" onclick="copyText('BMISEGCX')">نسخ</button></span>
+                            </div>
+                        </div>
+
+                        <div class="payment-form" style="margin-top:16px">
+                            <div class="form-group">
+                                <label>رقم مرجع التحويل (اختياري)</label>
+                                <input type="text" placeholder="أدخل رقم مرجع التحويل بعد إتمامه" id="bankRef" dir="ltr" style="text-align:left">
+                            </div>
+
+                            <div class="payment-note">
+                                <span class="note-icon">⏰</span>
+                                <span>سيتم تأكيد الطلب خلال 1-2 ساعة من استلام التحويل. يمكنك رفع إيصال التحويل لتسريع العملية.</span>
+                            </div>
+
+                            <button class="checkout-btn" onclick="processPayment('bank')">
+                                تأكيد الطلب بعد التحويل 🏦
+                            </button>
+                        </div>
+                    </div>
+                `;
+                break;
+
+            case 'instapay':
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">⚡ إنستاباي - تحويل فوري</h3>
+                        
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px">حوّل المبلغ فورًا عبر إنستاباي من أي تطبيق بنكي مصري</p>
+
+                        <div class="payment-summary">
+                            <div class="payment-summary-row total">
+                                <span>المبلغ المطلوب</span>
+                                <span>${finalTotal.toFixed(2)} ج.م</span>
+                            </div>
+                        </div>
+
+                        <div class="bank-info-box">
+                            <div class="bank-title">⚡ بيانات إنستاباي</div>
+                            <div class="bank-info-row">
+                                <span class="label">اسم المستلم (IPA)</span>
+                                <span class="value">EgyptPharmacy@instapay <button class="copy-btn" onclick="copyText('EgyptPharmacy@instapay')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">رقم الموبايل</span>
+                                <span class="value">01012345678 <button class="copy-btn" onclick="copyText('01012345678')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">المبلغ</span>
+                                <span class="value">${finalTotal.toFixed(2)} EGP <button class="copy-btn" onclick="copyText('${finalTotal.toFixed(2)}')">نسخ</button></span>
+                            </div>
+                        </div>
+
+                        <div class="payment-note" style="margin-top:14px">
+                            <span class="note-icon">📌</span>
+                            <span>افتح تطبيق البنك الخاص بك > تحويلات > إنستاباي > أدخل البيانات أعلاه</span>
+                        </div>
+
+                        <div class="payment-form" style="margin-top:16px">
+                            <div class="form-group">
+                                <label>رقم مرجع إنستاباي</label>
+                                <input type="text" placeholder="أدخل رقم المرجع بعد التحويل" id="instapayRef" dir="ltr" style="text-align:left">
+                            </div>
+
+                            <button class="checkout-btn" onclick="processPayment('instapay')">
+                                تأكيد التحويل ⚡
+                            </button>
+                            
+                            <div class="secure-badge">⚡ التحويل فوري - تأكيد خلال دقائق</div>
+                        </div>
+                    </div>
+                `;
+                break;
+
+            case 'fawry':
+                const fawryCode = 'FWR-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">🏪 الدفع عبر فوري</h3>
+
+                        <div class="bank-info-box">
+                            <div class="bank-title">🏪 بيانات الدفع عبر فوري</div>
+                            <div class="bank-info-row">
+                                <span class="label">كود الدفع</span>
+                                <span class="value" style="font-size:1.1rem;color:var(--accent)">${fawryCode} <button class="copy-btn" onclick="copyText('${fawryCode}')">نسخ</button></span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">المبلغ</span>
+                                <span class="value">${finalTotal.toFixed(2)} ج.م</span>
+                            </div>
+                            <div class="bank-info-row">
+                                <span class="label">صالح حتى</span>
+                                <span class="value">${new Date(Date.now() + 48*60*60*1000).toLocaleDateString('ar-EG')} (48 ساعة)</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-note" style="margin-top:14px">
+                            <span class="note-icon">📌</span>
+                            <span>اذهب لأقرب منفذ فوري أو استخدم تطبيق My Fawry وادفع بالكود أعلاه</span>
+                        </div>
+
+                        <div class="payment-note">
+                            <span class="note-icon">⏰</span>
+                            <span>سيتم تجهيز الطلب تلقائيًا فور استلام الدفع</span>
+                        </div>
+
+                        <button class="checkout-btn" style="margin-top:16px" onclick="processPayment('fawry')">
+                            تم - سأدفع عبر فوري 🏪
+                        </button>
+                    </div>
+                `;
+                break;
+
+            case 'cod':
+                formHTML = `
+                    <div class="payment-step">
+                        <button class="back-btn" onclick="checkout()">→ العودة لطرق الدفع</button>
+                        
+                        <div class="step-indicator">
+                            <span class="step-dot done"></span>
+                            <span class="step-dot done"></span>
+                            <span class="step-dot active"></span>
+                        </div>
+
+                        <h3 style="font-size:1rem;margin-bottom:16px">💵 الدفع عند الاستلام</h3>
+
+                        <div class="payment-form">
+                            <div class="form-group">
+                                <label>الاسم الكامل</label>
+                                <input type="text" placeholder="اسمك الثلاثي" id="codName">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الموبايل</label>
+                                <input type="tel" placeholder="01X XXXX XXXX" id="codPhone" maxlength="11" dir="ltr" style="text-align:left">
+                            </div>
+                            <div class="form-group">
+                                <label>عنوان التوصيل</label>
+                                <input type="text" placeholder="العنوان بالتفصيل (شارع، مبنى، شقة)" id="codAddress">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>المحافظة</label>
+                                    <select id="codCity">
+                                        <option value="">اختر المحافظة</option>
+                                        <option>القاهرة</option>
+                                        <option>الجيزة</option>
+                                        <option>الإسكندرية</option>
+                                        <option>الدقهلية</option>
+                                        <option>الشرقية</option>
+                                        <option>المنوفية</option>
+                                        <option>الغربية</option>
+                                        <option>القليوبية</option>
+                                        <option>البحيرة</option>
+                                        <option>الفيوم</option>
+                                        <option>بني سويف</option>
+                                        <option>المنيا</option>
+                                        <option>أسيوط</option>
+                                        <option>سوهاج</option>
+                                        <option>قنا</option>
+                                        <option>الأقصر</option>
+                                        <option>أسوان</option>
+                                        <option>بورسعيد</option>
+                                        <option>الإسماعيلية</option>
+                                        <option>السويس</option>
+                                        <option>دمياط</option>
+                                        <option>كفر الشيخ</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>الرمز البريدي</label>
+                                    <input type="text" placeholder="اختياري" id="codZip" dir="ltr" style="text-align:left">
+                                </div>
+                            </div>
+
+                            <div class="payment-summary">
+                                <div class="payment-summary-row">
+                                    <span>المنتجات</span>
+                                    <span>${checkoutTotal.toFixed(2)} ج.م</span>
+                                </div>
+                                <div class="payment-summary-row">
+                                    <span>التوصيل</span>
+                                    <span>${deliveryFee === 0 ? 'مجانًا' : deliveryFee.toFixed(2) + ' ج.م'}</span>
+                                </div>
+                                <div class="payment-summary-row total">
+                                    <span>المبلغ عند الاستلام</span>
+                                    <span>${finalTotal.toFixed(2)} ج.م</span>
+                                </div>
+                            </div>
+
+                            <div class="payment-note">
+                                <span class="note-icon">💡</span>
+                                <span>يرجى تحضير المبلغ بالضبط. المندوب قد لا يملك فكة.</span>
+                            </div>
+
+                            <button class="checkout-btn" onclick="processPayment('cod')">
+                                تأكيد الطلب - دفع عند الاستلام 💵
+                            </button>
+                        </div>
+                    </div>
+                `;
+                break;
+        }
+
+        content.innerHTML = formHTML;
+    }
+
+    function selectWallet(el, wallet) {
+        selectedWallet = wallet;
+        document.querySelectorAll('.wallet-option').forEach(w => w.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    function formatCardNumber(input) {
+        let value = input.value.replace(/\D/g, '');
+        value = value.replace(/(.{4})/g, '$1 ').trim();
+        input.value = value;
+    }
+
+    function formatExpiry(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2);
+        }
+        input.value = value;
+    }
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('تم النسخ ✓');
+        }).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('تم النسخ ✓');
+        });
+    }
+
+    function processPayment(method) {
+        const deliveryFee = checkoutTotal >= 200 ? 0 : 25;
+        const finalTotal = checkoutTotal + deliveryFee;
+
+        // Validate based on method
+        if (method === 'card') {
+            const cardNumber = document.getElementById('cardNumber')?.value?.replace(/\s/g, '');
+            const cardName = document.getElementById('cardName')?.value;
+            const cardExpiry = document.getElementById('cardExpiry')?.value;
+            const cardCvv = document.getElementById('cardCvv')?.value;
+            
+            if (!cardName || !cardNumber || cardNumber.length < 16 || !cardExpiry || !cardCvv) {
+                showToast('يرجى إكمال بيانات البطاقة ⚠️');
+                return;
+            }
+        }
+
+        if (method === 'wallet') {
+            const walletNum = document.getElementById('walletNumber')?.value;
+            if (!walletNum || walletNum.length < 11) {
+                showToast('يرجى إدخال رقم المحفظة ⚠️');
+                return;
+            }
+            if (!selectedWallet) {
+                showToast('يرجى اختيار نوع المحفظة ⚠️');
+                return;
+            }
+        }
+
+        if (method === 'cod') {
+            const name = document.getElementById('codName')?.value;
+            const phone = document.getElementById('codPhone')?.value;
+            const address = document.getElementById('codAddress')?.value;
+            const city = document.getElementById('codCity')?.value;
+            
+            if (!name || !phone || !address || !city) {
+                showToast('يرجى إكمال بيانات التوصيل ⚠️');
+                return;
+            }
+        }
+
+        // Create order
+        const paymentLabels = {
+            'card': '💳 بطاقة ائتمان',
+            'wallet': '📱 محفظة إلكترونية',
+            'bank': '🏦 تحويل بنكي',
+            'instapay': '⚡ إنستاباي',
+            'fawry': '🏪 فوري',
+            'cod': '💵 دفع عند الاستلام'
+        };
+
+        const order = {
+            id: 'ORD-' + Date.now().toString(36).toUpperCase(),
+            items: [...cart],
+            total: finalTotal,
+            date: new Date().toLocaleDateString('ar-EG'),
+            status: method === 'cod' || method === 'card' || method === 'wallet' ? 'pending' : 'awaiting_payment',
+            paymentMethod: paymentLabels[method]
+        };
+
+        orders.unshift(order);
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        cart = [];
+        saveCart();
+        updateCartBadge();
+
+        // Show success
+        const content = document.getElementById('cartContent');
+        let successMsg = '';
+        
+        switch(method) {
+            case 'card':
+                successMsg = 'تم خصم المبلغ بنجاح من بطاقتك';
+                break;
+            case 'wallet':
+                successMsg = 'تم إرسال طلب الدفع لمحفظتك. يرجى تأكيد العملية من هاتفك';
+                break;
+            case 'bank':
+                successMsg = 'سيتم تأكيد الطلب فور استلام التحويل البنكي (1-2 ساعة)';
+                break;
+            case 'instapay':
+                successMsg = 'سيتم تأكيد الطلب فور وصول تحويل إنستاباي (خلال دقائق)';
+                break;
+            case 'fawry':
+                successMsg = 'يرجى الدفع عبر فوري خلال 48 ساعة لتأكيد الطلب';
+                break;
+            case 'cod':
+                successMsg = 'سيتم التوصيل خلال 30-60 دقيقة. جهّز المبلغ المطلوب';
+                break;
+        }
+
+        content.innerHTML = `
+            <div class="order-success">
+                <div class="success-icon">🎉</div>
+                <h3>تم تأكيد الطلب!</h3>
+                <p>رقم الطلب: <strong>${order.id}</strong></p>
+                <p style="margin-top:8px;font-size:0.85rem;color:var(--text-secondary)">${successMsg}</p>
+                <p style="margin-top:12px;font-size:0.8rem;color:var(--text-muted)">طريقة الدفع: ${paymentLabels[method]}</p>
+                <p style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-top:8px">${finalTotal.toFixed(2)} ج.م</p>
+                <div class="payment-note" style="margin-top:16px;text-align:right">
+                    <span class="note-icon">📱</span>
+                    <span>سيتم إرسال تحديثات الطلب عبر SMS</span>
+                </div>
+            </div>
+        `;
+    }
+
+    // ==========================================
+    // Navigation
+    // ==========================================
+    function switchPage(page) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+        if (page === 'home') {
+            document.getElementById('homePage').classList.add('active');
+            document.querySelectorAll('.nav-item')[0].classList.add('active');
+        } else if (page === 'orders') {
+            document.getElementById('ordersPage').classList.add('active');
+            document.querySelectorAll('.nav-item')[1].classList.add('active');
+            renderOrders();
+        } else if (page === 'profile') {
+            document.getElementById('profilePage').classList.add('active');
+            document.querySelectorAll('.nav-item')[3].classList.add('active');
+        }
+    }
+
+    function renderOrders() {
+        const list = document.getElementById('ordersList');
+
+        if (orders.length === 0) {
+            list.innerHTML = `
+                <div style="text-align:center;padding:60px 20px;color:var(--text-muted)">
+                    <div style="font-size:3rem;margin-bottom:12px">📦</div>
+                    <p>لا توجد طلبات حتى الآن</p>
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = orders.map(order => {
+            const itemNames = order.items.map(item => {
+                const product = products.find(p => p.id === item.id);
+                return product ? product.name : '';
+            }).filter(Boolean).join(' • ');
+
+            const statusLabels = {
+                'pending': 'قيد التوصيل',
+                'awaiting_payment': 'بانتظار الدفع',
+                'delivered': 'تم التوصيل'
+            };
+
+            return `
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <span class="order-id">${order.id} | ${order.date}</span>
+                        <span class="order-status ${order.status}">${statusLabels[order.status] || 'قيد التوصيل'}</span>
+                    </div>
+                    <div class="order-items-list">${itemNames}</div>
+                    ${order.paymentMethod ? '<div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:6px">' + order.paymentMethod + '</div>' : ''}
+                    <div class="order-total">${order.total.toFixed(2)} ج.م</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ==========================================
+    // Toast
+    // ==========================================
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // ==========================================
+    // Close modals on overlay click
+    // ==========================================
+    document.getElementById('cartModal').addEventListener('click', function(e) {
+        if (e.target === this) closeCart();
+    });
+
+    document.getElementById('detailModal').addEventListener('click', function(e) {
+        if (e.target === this) closeDetail();
+    });
+
+    // Initialize
+    init();
+    </script>
+</body>
+</html>
